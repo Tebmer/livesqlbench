@@ -251,7 +251,7 @@ export default function DataViewer() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-3">LiveSQLBench Data</h2>
           <div className="text-gray-600 max-w-3xl mx-auto space-y-2">
-            <p>Explore <strong className="text-purple-600">LiveSQLBench-Lite</strong> demonstration data, our initial release featuring 270+ SQL tasks across 18 diverse databases. We are actively expanding to include 600+ samples in the upcoming version.</p>
+            <p>Explore <strong className="text-purple-600">LiveSQLBench-Lite</strong> demonstration data, our initial release featuring 270 SQL tasks across 18 diverse databases. Each task features unambiguous user queries grounded in external knowledge, with medium to hard complexity SQL statements. We are actively expanding to include 600+ samples in the upcoming version. </p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mt-3">
               <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
                 <div className="font-semibold text-blue-700">180</div>
@@ -274,7 +274,7 @@ export default function DataViewer() {
                 <div className="text-xs text-indigo-600 mt-1">(Expanding)</div>
               </div>
             </div>
-            <p className="text-sm text-gray-500 mt-3">Each task features unambiguous user queries grounded in external knowledge, with medium to hard complexity SQL statements and comprehensive knowledge bases. <span className="text-purple-600 font-medium">LiveSQLBench-Lite</span> serves as our foundation, with continuous expansion planned to provide even more comprehensive evaluation capabilities.</p>
+            {/* <p className="text-sm text-gray-500 mt-3">Each task features unambiguous user queries grounded in external knowledge, with medium to hard complexity SQL statements and comprehensive knowledge bases.</p> */}
           </div>
         </div>
         
@@ -396,7 +396,7 @@ export default function DataViewer() {
                                   <svg className="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
                                   </svg>
-                                  External Knowledge
+                                  Required External Knowledge
                                 </h5>
                                 <div className="space-y-3">
                                   {selectedEntry.external_knowledge.map((id) => {

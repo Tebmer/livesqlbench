@@ -1,51 +1,90 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ArrowDown } from 'lucide-react';
 
+interface ModelResult {
+  name: string;
+  completionRate: number;
+  logo: string;
+  fullName: string;
+  category: 'modelBase' | 'agent';
+}
+
 const Leaderboard = () => {
-  const modelData = [
-    { 
-      name: 'o3-mini-2025-01-31',
-      completionRate: 42.59,
-      logo: '/openai-logomark.png',
-      fullName: 'o3-mini'
-    },
-    { 
-      name: 'qwen-qwen3-235b-a22b',
-      completionRate: 35.93,
-      logo: '/qwen_logo.png',
-      fullName: 'Qwen 3 235B'
-    },
-    { 
-      name: 'gemini-2-0-flash-001',
-      completionRate: 35.56,
-      logo: '/google-gemini-icon.png',
-      fullName: 'Gemini 2.0 Flash'
-    },
-    { 
-      name: 'gpt-4o-2024-11-20',
-      completionRate: 34.81,
-      logo: '/openai-logomark.png',
-      fullName: 'GPT-4o'
-    },
-    { 
-      name: 'claude-3-7-sonnet-20250219',
-      completionRate: 32.96,
-      logo: '/claude_logo.png',
-      fullName: 'Claude 3.7 Sonnet'
-    },
-    { 
-      name: 'deepsseek-deepseek-r1',
-      completionRate: 0,
-      logo: '/deepseek_logo.png',
-      fullName: 'DeepSeek R1'
-    },
-    { 
-      name: 'deepsseek-deepseek-chat',
-      completionRate: 0,
-      logo: '/deepseek_logo.png',
-      fullName: 'DeepSeek Chat'
+  const [activeTab, setActiveTab] = useState<'overall' | 'modelBase' | 'agent'>('overall');
+
+  const modelData: { modelBase: ModelResult[]; agent: ModelResult[] } = {
+    modelBase: [
+      { 
+        name: 'o3-mini-2025-01-31',
+        completionRate: 42.59,
+        logo: '/openai-logomark.png',
+        fullName: 'o3-mini',
+        category: 'modelBase'
+      },
+      { 
+        name: 'qwen-qwen3-235b-a22b',
+        completionRate: 35.93,
+        logo: '/qwen_logo.png',
+        fullName: 'Qwen 3 235B',
+        category: 'modelBase'
+      },
+      { 
+        name: 'gemini-2-0-flash-001',
+        completionRate: 35.56,
+        logo: '/google-gemini-icon.png',
+        fullName: 'Gemini 2.0 Flash',
+        category: 'modelBase'
+      },
+      { 
+        name: 'gpt-4o-2024-11-20',
+        completionRate: 34.81,
+        logo: '/openai-logomark.png',
+        fullName: 'GPT-4o',
+        category: 'modelBase'
+      },
+      { 
+        name: 'claude-3-7-sonnet-20250219',
+        completionRate: 32.96,
+        logo: '/claude_logo.png',
+        fullName: 'Claude 3.7 Sonnet',
+        category: 'modelBase'
+      },
+      { 
+        name: 'deepsseek-deepseek-r1',
+        completionRate: 0,
+        logo: '/deepseek_logo.png',
+        fullName: 'DeepSeek R1',
+        category: 'modelBase'
+      },
+      { 
+        name: 'deepsseek-deepseek-chat',
+        completionRate: 0,
+        logo: '/deepseek_logo.png',
+        fullName: 'DeepSeek Chat',
+        category: 'modelBase'
+      }
+    ],
+    agent: [] // Empty for now, will be populated later
+  };
+
+  // Get overall data by combining all categories
+  const overallData = [...modelData.modelBase, ...modelData.agent].sort((a, b) => b.completionRate - a.completionRate);
+
+  // Get data for current tab
+  const getCurrentData = () => {
+    switch (activeTab) {
+      case 'overall':
+        return overallData;
+      case 'modelBase':
+        return modelData.modelBase.sort((a, b) => b.completionRate - a.completionRate);
+      case 'agent':
+        return modelData.agent.sort((a, b) => b.completionRate - a.completionRate);
+      default:
+        return overallData;
     }
-  ].sort((a, b) => b.completionRate - a.completionRate);
+  };
+
+  const currentData = getCurrentData();
 
   return (
     <section className="w-full mb-12">
@@ -70,7 +109,6 @@ const Leaderboard = () => {
                   <span className="text-blue-500 mr-2">•</span>
                   <span>Management SQLs: Verify through comprehensive test cases</span>
                 </li>
-
               </ul>
             </div>
           </div>
@@ -78,6 +116,30 @@ const Leaderboard = () => {
           <div className="md:w-1/2">
             <div className="text-xs text-gray-600 text-right mb-2">
               Last Updated: 05/15/2024
+            </div>
+
+            {/* Category Tabs */}
+            <div className="flex space-x-2 mb-4">
+              {[
+                { id: 'overall', label: 'Overall' },
+                { id: 'modelBase', label: 'Model Base' },
+                { id: 'agent', label: 'Agent' }
+              ].map((tab) => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as 'overall' | 'modelBase' | 'agent')}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                    activeTab === tab.id
+                      ? 'bg-blue-100 text-blue-700 border border-blue-200'
+                      : 'bg-gray-50 text-gray-600 hover:bg-gray-100 border border-gray-200'
+                  }`}
+                >
+                  {tab.label}
+                  {tab.id === 'agent' && currentData.length === 0 && (
+                    <span className="ml-1 text-xs text-gray-400">(Coming Soon)</span>
+                  )}
+                </button>
+              ))}
             </div>
             
             <div className="relative w-full overflow-auto rounded-lg border border-gray-200 shadow-sm">
@@ -88,42 +150,50 @@ const Leaderboard = () => {
                       Model
                     </th>
                     <th className="h-12 px-4 text-right align-middle font-medium text-gray-600">
-                      Sucess Rate (%) <ArrowDown className="inline h-4 w-4 text-gray-400" />
+                      Success Rate (%) <ArrowDown className="inline h-4 w-4 text-gray-400" />
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {modelData.map((model, index) => (
-                    <tr 
-                      key={model.name}
-                      className={`border-b hover:bg-gray-50 transition-colors ${
-                        index === 0 ? 'bg-blue-50' : ''
-                      }`}
-                    >
-                      <td className="p-4 align-middle">
-                        <div className="flex items-center gap-3">
-                          {index === 0 && (
-                            <span className="text-yellow-500">🏆</span>
-                          )}
-                          <img
-                            src={model.logo}
-                            alt={`${model.fullName} logo`}
-                            className="w-5 h-5 object-contain"
-                          />
-                          <span className="font-medium">{model.fullName}</span>
-                        </div>
-                      </td>
-                      <td className="p-4 align-middle text-right font-medium">
-                        {model.completionRate > 0 ? `${model.completionRate.toFixed(2)}%` : 'N/A'}
+                  {currentData.length > 0 ? (
+                    currentData.map((model, index) => (
+                      <tr 
+                        key={model.name}
+                        className={`border-b hover:bg-gray-50 transition-colors ${
+                          index === 0 ? 'bg-blue-50' : ''
+                        }`}
+                      >
+                        <td className="p-4 align-middle">
+                          <div className="flex items-center gap-3">
+                            {index === 0 && (
+                              <span className="text-yellow-500">🏆</span>
+                            )}
+                            <img
+                              src={model.logo}
+                              alt={`${model.fullName} logo`}
+                              className="w-5 h-5 object-contain"
+                            />
+                            <span className="font-medium">{model.fullName}</span>
+                          </div>
+                        </td>
+                        <td className="p-4 align-middle text-right font-medium">
+                          {model.completionRate > 0 ? `${model.completionRate.toFixed(2)}%` : 'N/A'}
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={2} className="p-8 text-center text-gray-500">
+                        No results available for this category yet.
                       </td>
                     </tr>
-                  ))}
+                  )}
                 </tbody>
               </table>
             </div>
             
             <p className="mt-4 text-sm text-gray-600">
-              <span className="font-medium">Note:</span> Results are based on 270+ SQL tasks across 18 databases, including both SELECT queries and management operations.
+              <span className="font-medium">Note:</span> Results are based on LiveSQLBench-Lite (270 SQL tasks across 18 databases), including both SELECT queries and management operations.
             </p>
           </div>
         </div>
