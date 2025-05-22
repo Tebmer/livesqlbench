@@ -3,18 +3,11 @@ import React from 'react';
 const RelatedArticles = () => {
   const articles = [
     {
-      source: "The New York Times",
-      domain: "www.nytimes.com",
-      title: "When A.I. Passes This Test, Look Out",
-      description: "The creators of a new test called 'Humanity's Last Exam' argue we may soon lose the ability to create tests hard enough for A.I. models.",
-      url: "https://www.nytimes.com/2025/01/23/technology/ai-test-humanitys-last-exam.html"
-    },
-    {
-      source: "Reuters",
-      domain: "www.reuters.com",
-      title: "AI experts ready 'Humanity's Last Exam' to stump powerful tech",
-      description: "A team of technology experts issued a global call on Monday seeking the toughest questions to pose to artificial intelligence systems, which increasingly have handled popular benchmark tests like child's play.",
-      url: "https://www.reuters.com/technology/artificial-intelligence/ai-experts-ready-humanitys-last-exam-stump-powerful-tech-2024-09-16/"
+      source: "NeurIPS 2023",
+      domain: "www.nips.cc",
+      title: "Can LLM Already Serve as A Database Interface? A Big Bench for Large-Scale Database Grounded Text-to-SQLs",
+      description: "This paper introduces BIRD, a Big benchmark for large-scale database grounded in text-to-SQL tasks, containing 12,751 pairs of text-to-SQL data and 95 databases with a total size of 33.4 GB, spanning 37 professional domains.",
+      url: "https://proceedings.neurips.cc/paper_files/paper/2023/hash/83fc8fab1710363050bbd1d4b8cc0021-Abstract-Datasets_and_Benchmarks.html"
     }
   ];
 

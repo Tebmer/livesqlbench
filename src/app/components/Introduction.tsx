@@ -11,7 +11,7 @@ const Introduction = () => {
             <div className="space-y-4">
                 <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl shadow-sm">
                     <p className="text-base text-gray-700 leading-relaxed mb-4">
-                        <strong className="text-blue-600">LiveSQLBench</strong> is a contamination-free, continuously evolving benchmark designed to evaluate LLMs on complex, real-world SQL tasks. The current version, <strong className="text-purple-600">LiveSQLBench-Lite</strong>, features 18 databases with 270 samples, serving as our initial release. We are actively expanding in two dimensions: (1) increasing the number of databases and tasks to 600+ samples, and (2) creating <strong className="text-indigo-600">Large Versions</strong> of each database, featuring 40+ tables and 800+ columns, significantly expanding the complexity and scale.
+                        <strong className="text-blue-600">LiveSQLBench</strong> is a contamination-free, continuously evolving benchmark designed to evaluate LLMs on complex, real-world SQL tasks. The current version, <strong className="text-purple-600">LiveSQLBench-Lite</strong>, features 18 databases with 270 samples, serving as our initial release. We are actively expanding in two dimensions: (1) increasing the number of databases and tasks to 600+ samples, and (2) creating <strong className="text-indigo-600">Large Versions (Industrial Level)</strong> of each database, featuring 40+ tables and 800+ columns, significantly expanding the complexity and scale.
                     </p>
 
                     <ul className="space-y-2">
