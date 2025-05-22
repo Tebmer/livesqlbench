@@ -3,10 +3,11 @@ import { readKnowledgeFile } from '@/utils/fileUtils';
 
 export async function GET(
   request: Request,
-  { params }: { params: { db: string } }
+  context: { params: Promise<{ db: string }> }
 ) {
   try {
-    const knowledge = readKnowledgeFile(params.db);
+    const { db: dbName } = await context.params;
+    const knowledge = readKnowledgeFile(dbName);
     return NextResponse.json(knowledge);
   } catch (error) {
     return NextResponse.json({ error: 'Failed to get knowledge base' }, { status: 500 });

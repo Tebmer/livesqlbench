@@ -9,12 +9,19 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@types/fs-extra": "^11.0.4",
     "@types/react-syntax-highlighter": "^15.5.13",
+    "fs-extra": "^11.3.0",
+    "graphology": "^0.26.0",
+    "graphology-graphml": "^0.5.2",
+    "graphviz-react": "^1.2.5",
     "lucide-react": "^0.475.0",
+    "mxgraph": "^4.2.2",
     "next": "15.1.7",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-syntax-highlighter": "^15.6.1"
+    "react-syntax-highlighter": "^15.6.1",
+    "sigma": "^3.0.1"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

@@ -6,6 +6,7 @@ import SqlViewer from '@/components/SqlViewer';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { Copy, Check } from 'lucide-react';
+import SchemaViewer from './SchemaViewer';
 
 export default function DataViewer() {
   const [selectedDb, setSelectedDb] = useState<string>('');
@@ -21,6 +22,8 @@ export default function DataViewer() {
     ambiguity: true,
     followUp: true
   });
+  const [schemaDot, setSchemaDot] = useState<string | null>(null);
+  const [showSchema, setShowSchema] = useState(false);
 
   useEffect(() => {
     fetchDatabases();
@@ -44,24 +47,31 @@ export default function DataViewer() {
     setError(null);
     setSelectedEntry(null);
     setShowDetails(false);
+    setSchemaDot(null);
+    setShowSchema(false);
 
     try {
-      const [dataResponse, knowledgeResponse] = await Promise.all([
+      const [dataResponse, knowledgeResponse, schemaResponse] = await Promise.all([
         fetch(`/api/data/${dbName}`),
-        fetch(`/api/knowledge/${dbName}`)
+        fetch(`/api/knowledge/${dbName}`),
+        fetch(`/api/schema/${dbName}`)
       ]);
 
       if (!dataResponse.ok || !knowledgeResponse.ok) {
         throw new Error('Failed to fetch data');
       }
 
-      const [dataEntries, knowledgeEntries] = await Promise.all([
+      const [dataEntries, knowledgeEntries, schemaData] = await Promise.all([
         dataResponse.json(),
-        knowledgeResponse.json()
+        knowledgeResponse.json(),
+        schemaResponse.ok ? schemaResponse.json() : { dotContent: null }
       ]);
 
       setData(dataEntries);
       setKnowledge(knowledgeEntries);
+      if (schemaData.dotContent) {
+        setSchemaDot(schemaData.dotContent);
+      }
     } catch (err) {
       setError('Failed to load data');
       console.error(err);
@@ -320,6 +330,38 @@ export default function DataViewer() {
         ) : (
           selectedDb && (
             <>
+              {/* Add Schema Viewer Toggle Button */}
+              {schemaDot && (
+                <div className="max-w-4xl mx-auto mb-6">
+                  <button
+                    onClick={() => setShowSchema(!showSchema)}
+                    className="w-full flex items-center justify-between p-4 bg-white rounded-xl border border-gray-200 shadow-sm hover:shadow-md transition-shadow"
+                  >
+                    <div className="flex items-center">
+                      <svg className="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path>
+                      </svg>
+                      <span className="font-medium text-gray-900">Database Schema</span>
+                    </div>
+                    <svg 
+                      className={`w-5 h-5 transform transition-transform ${showSchema ? 'rotate-180' : ''}`}
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                  </button>
+                </div>
+              )}
+
+              {/* Schema Viewer */}
+              {showSchema && schemaDot && (
+                <div className="max-w-4xl mx-auto mb-8">
+                  <SchemaViewer dbName={selectedDb} dotContent={schemaDot} />
+                </div>
+              )}
+
               {selectedEntry && showDetails && (
                 <div className="w-full py-6">
                   <div

@@ -11,7 +11,7 @@ const Introduction = () => {
             <div className="space-y-4">
                 <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl shadow-sm">
                     <p className="text-base text-gray-700 leading-relaxed mb-4">
-                        <strong className="text-blue-600">LiveSQLBench</strong> is a contamination-free, continuously evolving benchmark designed to evaluate LLMs on complex, real-world SQL tasks. The current version, <strong className="text-purple-600">LiveSQLBench-Lite</strong>, features 18 databases with 270+ samples, serving as our initial release. We are actively expanding the benchmark to include more databases and 600+ samples in the upcoming version.
+                        <strong className="text-blue-600">LiveSQLBench</strong> is a contamination-free, continuously evolving benchmark designed to evaluate LLMs on complex, real-world SQL tasks. The current version, <strong className="text-purple-600">LiveSQLBench-Lite</strong>, features 18 databases with 270 samples, serving as our initial release. We are actively expanding the benchmark to include more databases and 600+ samples in the upcoming version.
                     </p>
 
                     <ul className="space-y-2">
@@ -26,7 +26,7 @@ const Introduction = () => {
                             },
                             {
                                 title: "Contextual Reasoning",
-                                desc: "Every database scenario includes an external knowledge document for grounding beyond the schema."
+                                desc: "Every database scenario includes an external knowledge document for grounding beyond the schema. Knowledge has dependencies, requiring the LLM's multi-hop reasoning ability."
                             },
                             {
                                 title: "Full SQL Spectrum",
