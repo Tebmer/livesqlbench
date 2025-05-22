@@ -10,29 +10,7 @@ This is the homepage for the LiveSQLBench project. It contains:
 
 
 
-
-## Prerequisites
-Replace the data 'data' folder with the newest data.
-
-## Getting Started If Using Docker 
-
-### Build the image with the development target
-```bash 
-docker build --target development -t live_sql_bench_viewer .
-```
-
-### Run the container with port forwarding and volume mounting for hot reloading
-```bash
-docker run -p 3001:3000 -v $(pwd):/app live_sql_bench_viewer
-```
-
-### Open the browser and navigate to the app
-```bash
-http://localhost:3001
-```
-
-
-## Getting Started (No need to do if using Docker)
+## Getting Started If You Have Node.js Installed
 
 First, run the development server:
 
@@ -51,6 +29,28 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+
+
+
+
+## Getting Started Using Docker If You Don't Have Node.js Installed
+
+### Build the image with the development target
+```bash 
+docker build --target development -t live_sql_bench_viewer .
+```
+
+### Run the container with port forwarding and volume mounting for hot reloading
+```bash
+docker run -p 3001:3000 -v "$(pwd):/app" live_sql_bench_viewer
+```
+
+### Open the browser and navigate to the app
+```bash
+http://localhost:3001
+```
+
+
 
 ## Learn More
 
