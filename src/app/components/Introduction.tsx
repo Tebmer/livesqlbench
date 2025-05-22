@@ -11,7 +11,7 @@ const Introduction = () => {
             <div className="space-y-4">
                 <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl shadow-sm">
                     <p className="text-base text-gray-700 leading-relaxed mb-4">
-                        <strong className="text-blue-600">LiveSQLBench</strong> is a contamination-free, continuously evolving benchmark designed to evaluate large language models (LLMs) on complex, real-world SQL tasks.
+                        <strong className="text-blue-600">LiveSQLBench</strong> is a contamination-free, continuously evolving benchmark designed to evaluate LLMs on complex, real-world SQL tasks.
                     </p>
 
                     <ul className="space-y-2">
@@ -22,7 +22,7 @@ const Introduction = () => {
                             },
                             {
                                 title: "Live User Queries and SQL",
-                                desc: "Each task pairs user queries with annotated, gold-standard SQL statements."
+                                desc: "Each task pairs unambiguous user queries with annotated, gold-standard SQL statements."
                             },
                             {
                                 title: "Contextual Reasoning",

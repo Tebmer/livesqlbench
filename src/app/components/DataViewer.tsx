@@ -246,131 +246,153 @@ export default function DataViewer() {
   };
 
   return (
-    <section className="my-12" style={{ width: '100%', maxWidth: '100%', margin: '0 auto' }}>
-      <h2 className="text-2xl font-bold mb-6 text-center">LiveSQLBench Data Viewer</h2>
-      
-      <div className="mb-8">
-        <label className="block text-sm font-medium mb-2 text-center">Select Database:</label>
-        <div className="relative flex justify-center">
-          <select
-            className="w-full max-w-xs p-3 pl-4 pr-10 border border-gray-300 rounded-lg bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none"
-            value={selectedDb}
-            onChange={(e) => handleDbSelect(e.target.value)}
-          >
-            <option value="">Select a database...</option>
-            {databases.map((db) => (
-              <option key={db} value={db}>
-                {db}
-              </option>
-            ))}
-          </select>
-          <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-            <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-            </svg>
+    <section className="min-h-screen bg-gradient-to-b from-gray-50 to-white py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="text-center mb-12">
+          <h2 className="text-3xl font-bold text-gray-900 mb-3">LiveSQLBench Data</h2>
+          <p className="text-gray-600 max-w-2xl mx-auto">Explore and analyze SQL queries, solutions, and knowledge base entries</p>
+        </div>
+        
+        <div className="mb-8 max-w-md mx-auto">
+          <label className="block text-sm font-medium text-gray-700 mb-2 text-center">Select Database</label>
+          <div className="relative">
+            <select
+              className="w-full p-3 pl-4 pr-10 border border-gray-300 rounded-xl bg-white shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 appearance-none transition-all duration-200 hover:border-blue-400"
+              value={selectedDb}
+              onChange={(e) => handleDbSelect(e.target.value)}
+            >
+              <option value="">Select a database...</option>
+              {databases.map((db) => (
+                <option key={db} value={db}>
+                  {db}
+                </option>
+              ))}
+            </select>
+            <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
+              <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
           </div>
         </div>
-      </div>
 
-      {error && (
-        <div className="p-4 mb-4 text-red-700 bg-red-100 rounded-lg">
-          {error}
-        </div>
-      )}
+        {error && (
+          <div className="max-w-2xl mx-auto p-4 mb-6 text-red-700 bg-red-50 border border-red-200 rounded-xl shadow-sm">
+            <div className="flex items-center">
+              <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              {error}
+            </div>
+          </div>
+        )}
 
-      {loading ? (
-        <div className="text-center py-8">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-gray-900 mx-auto"></div>
-          <p className="mt-4 text-gray-600">Loading data...</p>
-        </div>
-      ) : (
-        selectedDb && (
-          <>
-            {/* Selected Entry Details - Shown at the top when an entry is selected */}
-            {selectedEntry && showDetails && (
-            <div className="w-full py-8">               {/* just a normal block */}
-              <div                                        /* the actual card */
-                id="entry-details"
-                className="
-                  mx-auto                                /* <-- centers the card */
-                  max-w-7xl                              /* optional max width */
-                  p-6 mb-8
-                "
-              >
-                <div className="flex flex-col items-center w-full mb-4">
-                  <h3 className="text-xl font-semibold mb-2">Selected Entry Details</h3>
-                  <button
-                    onClick={() => setShowDetails(false)}
-                    className="text-sm text-gray-500 hover:text-gray-700"
+        {loading ? (
+          <div className="text-center py-12">
+            <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-blue-500 border-t-transparent"></div>
+            <p className="mt-4 text-gray-600 font-medium">Loading data...</p>
+          </div>
+        ) : (
+          selectedDb && (
+            <>
+              {selectedEntry && showDetails && (
+                <div className="w-full py-6">
+                  <div
+                    id="entry-details"
+                    className="mx-auto max-w-4xl bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
                   >
-                    Hide Details
-                  </button>
-                </div>
+                    <div className="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4">
+                      <div className="flex justify-between items-center">
+                        <h3 className="text-xl font-semibold text-white">Selected Entry Details</h3>
+                        <button
+                          onClick={() => setShowDetails(false)}
+                          className="text-sm text-blue-100 hover:text-white transition-colors duration-200"
+                        >
+                          Hide Details
+                        </button>
+                      </div>
+                    </div>
 
-                {/* columns */}
-                <div
-                  className="
-                    flex flex-wrap lg:flex-nowrap        /* stack on small screens */
-                    justify-center gap-8
-                    px-6 pb-6
-                  "
-                >
-                    {/* Main Query Information */}
-                    <div className="flex-shrink-0" style={{ width: '550px' }}>
-                      <div className="space-y-4">
+                    <div className="p-6">
+                      <div className="space-y-6">
                         {renderCollapsibleSection(
                           'mainQuery',
                           'Main Query Information',
-                          <div className="space-y-4">
-                            <div className="p-3 border rounded bg-gray-50">
-                              <h5 className="font-medium mb-2">Query</h5>
-                              <p className="text-gray-700">{selectedEntry.query}</p>
+                          <div className="space-y-6">
+                            <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                              <h5 className="font-semibold text-gray-900 mb-3 flex items-center">
+                                <svg className="w-5 h-5 mr-2 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"></path>
+                                </svg>
+                                Query
+                              </h5>
+                              <p className="text-gray-700 leading-relaxed">{selectedEntry.query}</p>
                             </div>
 
                             {selectedEntry.sol_sql.length > 0 && (
-                              <div className="p-3 border rounded bg-gray-50">
-                                <h5 className="font-medium mb-2">Solution SQL</h5>
+                              <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                <h5 className="font-semibold text-gray-900 mb-3 flex items-center">
+                                  <svg className="w-5 h-5 mr-2 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7"></path>
+                                  </svg>
+                                  Solution SQL
+                                </h5>
                                 <SqlViewerWithCopy sql={selectedEntry.sol_sql.join('\n')} />
                               </div>
                             )}
 
                             {selectedEntry.preprocess_sql.length > 0 && (
-                              <div className="p-3 border rounded bg-gray-50">
-                                <h5 className="font-medium mb-2">Preprocess SQL</h5>
+                              <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                <h5 className="font-semibold text-gray-900 mb-3 flex items-center">
+                                  <svg className="w-5 h-5 mr-2 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path>
+                                  </svg>
+                                  Preprocess SQL
+                                </h5>
                                 <SqlViewerWithCopy sql={selectedEntry.preprocess_sql.join('\n')} />
                               </div>
                             )}
 
                             {selectedEntry.clean_up_sqls.length > 0 && (
-                              <div className="p-3 border rounded bg-gray-50">
-                                <h5 className="font-medium mb-2">Clean Up SQL</h5>
+                              <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                <h5 className="font-semibold text-gray-900 mb-3 flex items-center">
+                                  <svg className="w-5 h-5 mr-2 text-yellow-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path>
+                                  </svg>
+                                  Clean Up SQL
+                                </h5>
                                 <SqlViewerWithCopy sql={selectedEntry.clean_up_sqls.join('\n')} />
                               </div>
                             )}
 
                             {selectedEntry.external_knowledge.length > 0 && (
-                              <div className="p-3 border rounded bg-gray-50">
-                                <h5 className="font-medium mb-2">External Knowledge</h5>
-                                <div className="space-y-2">
+                              <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                <h5 className="font-semibold text-gray-900 mb-3 flex items-center">
+                                  <svg className="w-5 h-5 mr-2 text-indigo-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                                  </svg>
+                                  External Knowledge
+                                </h5>
+                                <div className="space-y-3">
                                   {selectedEntry.external_knowledge.map((id) => {
                                     const knowledgeEntry = getKnowledgeById(id);
                                     return (
-                                      <div key={id} className="p-2 border rounded bg-white">
-                                        <div className="flex justify-between items-start">
-                                          <p className="font-medium">{knowledgeEntry ? knowledgeEntry.knowledge : `Knowledge ID ${id}`}</p>
-                                          <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">ID: {id}</span>
+                                      <div key={id} className="bg-white p-4 rounded-lg border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
+                                        <div className="flex justify-between items-start mb-2">
+                                          <p className="font-medium text-gray-900">{knowledgeEntry ? knowledgeEntry.knowledge : `Knowledge ID ${id}`}</p>
+                                          <span className="text-xs bg-blue-100 text-blue-800 px-2.5 py-1 rounded-full font-medium">ID: {id}</span>
                                         </div>
                                         {knowledgeEntry ? (
                                           <>
-                                            <p className="text-sm text-gray-600 mt-1">{knowledgeEntry.description}</p>
-                                            <p className="text-sm font-mono mt-1">{knowledgeEntry.definition}</p>
-                                            <div className="mt-1 text-xs text-gray-500">
-                                              <span className="mr-2">Type: {knowledgeEntry.type}</span>
-                                              <span>Children Knowledge: {formatChildrenKnowledge(knowledgeEntry.children_knowledge)}</span>
+                                            <p className="text-sm text-gray-600 mb-2">{knowledgeEntry.description}</p>
+                                            <p className="text-sm font-mono bg-gray-50 p-2 rounded border border-gray-100 mb-2">{knowledgeEntry.definition}</p>
+                                            <div className="flex flex-wrap gap-2 text-xs">
+                                              <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Type: {knowledgeEntry.type}</span>
+                                              <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Children: {formatChildrenKnowledge(knowledgeEntry.children_knowledge)}</span>
                                             </div>
                                           </>
                                         ) : (
-                                          <p className="text-gray-500">Knowledge ID {id} not found</p>
+                                          <p className="text-gray-500 italic">Knowledge ID {id} not found</p>
                                         )}
                                       </div>
                                     );
@@ -380,216 +402,98 @@ export default function DataViewer() {
                             )}
 
                             {selectedEntry.test_cases && selectedEntry.test_cases.length > 0 && (
-                              renderTestCases(selectedEntry.test_cases)
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Ambiguity Information */}
-                    <div className="flex-shrink-0" style={{ width: '550px' }}>
-                      <div className="space-y-4">
-                        {renderCollapsibleSection(
-                          'ambiguity',
-                          'Ambiguity Information',
-                          <div className="space-y-4">
-                            <div className="p-3 border rounded bg-gray-50">
-                              <h5 className="font-medium mb-2">Ambiguous User Query</h5>
-                              <p className="text-gray-700">{selectedEntry.amb_user_query}</p>
-                              {selectedEntry.difficulty_tier && (
-                                <div className="mt-2">
-                                  <span className="inline-block px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded">
-                                    Difficulty Tier: {selectedEntry.difficulty_tier}
-                                  </span>
-                                </div>
-                              )}
-                            </div>
-
-                            {selectedEntry.user_query_ambiguity && (
-                              <div className="p-3 border rounded bg-gray-50">
-                                <h5 className="font-medium mb-2">User Query Ambiguity</h5>
-                                
-                                {selectedEntry.user_query_ambiguity.critical_ambiguity.length > 0 && (
-                                  <div className="mb-4">
-                                    <h6 className="font-medium text-red-600">Critical Ambiguity</h6>
-                                    <div className="space-y-2 mt-2">
-                                      {selectedEntry.user_query_ambiguity.critical_ambiguity.map((item, index) => (
-                                        <div key={index} className="p-2 border rounded bg-white">
-                                          <p><span className="font-medium">Term:</span> {item.term}</p>
-                                          <div className="mt-1">
-                                            <p className="font-medium text-sm">SQL Snippet:</p>
-                                            {renderSqlSnippet(item.sql_snippet)}
-                                          </div>
-                                          <p className="mt-1"><span className="font-medium">Type:</span> {item.type}</p>
-                                          <p className="mt-1"><span className="font-medium">Need Masking:</span> {item.is_mask ? "Yes" : "No"}</p>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-                                
-                                {selectedEntry.user_query_ambiguity.non_critical_ambiguity.length > 0 && (
-                                  <div>
-                                    <h6 className="font-medium text-yellow-600">Non-Critical Ambiguity</h6>
-                                    <div className="space-y-2 mt-2">
-                                      {selectedEntry.user_query_ambiguity.non_critical_ambiguity.map((item, index) => (
-                                        <div key={index} className="p-2 border rounded bg-white">
-                                          <p><span className="font-medium">Term:</span> {item.term}</p>
-                                          <div className="mt-1">
-                                            <p className="font-medium text-sm">SQL Snippet:</p>
-                                            {renderSqlSnippet(item.sql_snippet)}
-                                          </div>
-                                          <p className="mt-1"><span className="font-medium">Type:</span> {item.type}</p>
-                                          <p className="mt-1"><span className="font-medium">Need Masking:</span> {item.is_mask ? "Yes" : "No"}</p>
-                                        </div>
-                                      ))}
-                                    </div>
-                                  </div>
-                                )}
-                              </div>
-                            )}
-
-                            {selectedEntry.knowledge_ambiguity.length > 0 && (
-                              <div className="p-3 border rounded bg-gray-50">
-                                <h5 className="font-medium mb-2">Knowledge Ambiguity</h5>
-                                <div className="space-y-2">
-                                  {selectedEntry.knowledge_ambiguity.map((item, index) => (
-                                    <div key={index} className="p-2 border rounded bg-white">
-                                      <p><span className="font-medium">Term:</span> {item.term}</p>
-                                      <div className="mt-1">
-                                        <p className="font-medium text-sm">SQL Snippet:</p>
-                                        {renderSqlSnippet(item.sql_snippet)}
-                                      </div>
-                                      <p className="mt-1"><span className="font-medium">Type:</span> {item.type}</p>
-                                      <p className="mt-1"><span className="font-medium">Need Masking:</span> {item.is_mask ? "Yes" : "No"}</p>
-                                      <p><span className="font-medium">Deleted Knowledge:</span> {item.deleted_knowledge}</p>
-                                    </div>
-                                  ))}
-                                </div>
+                              <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl border border-gray-100 shadow-sm">
+                                <h5 className="font-semibold text-gray-900 mb-3 flex items-center">
+                                  <svg className="w-5 h-5 mr-2 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"></path>
+                                  </svg>
+                                  Test Cases
+                                </h5>
+                                {renderTestCases(selectedEntry.test_cases)}
                               </div>
                             )}
                           </div>
-                        )}
-                      </div>
-                    </div>
-
-                    {/* Follow-up Information */}
-                    <div className="flex-shrink-0" style={{ width: '550px' }}>
-                      <div className="space-y-4">
-                        {selectedEntry.follow_up && (
-                          renderCollapsibleSection(
-                            'followUp',
-                            'Follow-up Information',
-                            <div className="space-y-4">
-                              <div className="p-3 border rounded bg-gray-50">
-                                <h5 className="font-medium mb-2">Follow-up Query</h5>
-                                <p className="text-gray-700">{selectedEntry.follow_up.query}</p>
-                                {selectedEntry.follow_up.difficulty_tier && (
-                                  <div className="mt-2">
-                                    <span className="inline-block px-2 py-1 text-xs font-medium bg-purple-100 text-purple-800 rounded">
-                                      Follow-up Difficulty Tier: {selectedEntry.follow_up.difficulty_tier}
-                                    </span>
-                                  </div>
-                                )}
-                              </div>
-                              
-                              <div className="p-3 border rounded bg-gray-50">
-                                <h5 className="font-medium mb-2">Follow-up Solution SQL</h5>
-                                <SqlViewerWithCopy sql={selectedEntry.follow_up.sol_sql} />
-                              </div>
-                              
-                              {selectedEntry.follow_up.external_knowledge.length > 0 && (
-                                <div className="p-3 border rounded bg-gray-50">
-                                  <h5 className="font-medium mb-2">Follow-up External Knowledge</h5>
-                                  <div className="space-y-2">
-                                    {selectedEntry.follow_up.external_knowledge.map((id) => {
-                                      const knowledgeEntry = getKnowledgeById(id);
-                                      return (
-                                        <div key={id} className="p-2 border rounded bg-white">
-                                          <div className="flex justify-between items-start">
-                                            <p className="font-medium">{knowledgeEntry ? knowledgeEntry.knowledge : `Knowledge ID ${id}`}</p>
-                                            <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">ID: {id}</span>
-                                          </div>
-                                          {knowledgeEntry ? (
-                                            <>
-                                              <p className="text-sm text-gray-600 mt-1">{knowledgeEntry.description}</p>
-                                              <p className="text-sm font-mono mt-1">{knowledgeEntry.definition}</p>
-                                              <div className="mt-1 text-xs text-gray-500">
-                                                <span className="mr-2">Type: {knowledgeEntry.type}</span>
-                                                <span>Children Knowledge: {formatChildrenKnowledge(knowledgeEntry.children_knowledge)}</span>
-                                              </div>
-                                            </>
-                                          ) : (
-                                            <p className="text-gray-500">Knowledge ID {id} not found</p>
-                                          )}
-                                        </div>
-                                      );
-                                    })}
-                                  </div>
-                                </div>
-                              )}
-
-                              {selectedEntry.follow_up.test_cases && selectedEntry.follow_up.test_cases.length > 0 && (
-                                renderTestCases(selectedEntry.follow_up.test_cases, "Follow-up Test Cases")
-                              )}
-                            </div>
-                          )
                         )}
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            )}
+              )}
 
-            {/* Data and Knowledge Base Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Data Entries</h3>
-                <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
-                  {data.map((entry) => (
-                    <div
-                      key={entry.instance_id}
-                      className={`p-4 border rounded-lg cursor-pointer hover:bg-gray-50 ${
-                        selectedEntry?.instance_id === entry.instance_id ? 'bg-blue-50 border-blue-500' : ''
-                      }`}
-                      onClick={() => handleEntrySelect(entry)}
-                    >
-                      <h4 className="font-medium">Instance ID: {entry.instance_id}</h4>
-                      <p className="text-sm text-gray-600 mt-1">{entry.query}</p>
-                      <div className="mt-2 text-xs text-gray-500">
-                        <span className="mr-2">Category: {entry.category}</span>
-                        <span>Knowledge IDs: {entry.external_knowledge.join(', ')}</span>
-                      </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-8">
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                  <div className="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4">
+                    <h3 className="text-xl font-semibold text-white">Data Entries</h3>
+                  </div>
+                  <div className="p-6">
+                    <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+                      {data.map((entry) => (
+                        <div
+                          key={entry.instance_id}
+                          className={`p-4 rounded-xl border transition-all duration-200 cursor-pointer hover:shadow-md ${
+                            selectedEntry?.instance_id === entry.instance_id 
+                              ? 'bg-blue-50 border-blue-200 shadow-sm' 
+                              : 'bg-white border-gray-100 hover:border-blue-200'
+                          }`}
+                          onClick={() => handleEntrySelect(entry)}
+                        >
+                          <h4 className="font-medium text-gray-900">Instance ID: {entry.instance_id}</h4>
+                          <p className="text-sm text-gray-600 mt-2 line-clamp-2">{entry.query}</p>
+                          <div className="mt-3 flex flex-wrap gap-2">
+                            <span className="text-xs bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Category: {entry.category}</span>
+                            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">Knowledge IDs: {entry.external_knowledge.join(', ')}</span>
+                          </div>
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  </div>
+                </div>
+
+                <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+                  <div className="bg-gradient-to-r from-indigo-500 to-indigo-600 px-6 py-4">
+                    <h3 className="text-xl font-semibold text-white">Knowledge Base</h3>
+                  </div>
+                  <div className="p-6">
+                    <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2 custom-scrollbar">
+                      {knowledge.map((entry) => (
+                        <div key={entry.id} className="bg-white p-4 rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-200">
+                          <div className="flex justify-between items-start mb-2">
+                            <h4 className="font-medium text-gray-900">{entry.knowledge}</h4>
+                            <span className="text-xs bg-indigo-100 text-indigo-800 px-2.5 py-1 rounded-full font-medium">ID: {entry.id}</span>
+                          </div>
+                          <p className="text-sm text-gray-600 mb-2">{entry.description}</p>
+                          <p className="text-sm font-mono bg-gray-50 p-2 rounded border border-gray-100 mb-2">{entry.definition}</p>
+                          <div className="flex flex-wrap gap-2 text-xs">
+                            <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Type: {entry.type}</span>
+                            <span className="bg-gray-100 text-gray-700 px-2 py-1 rounded-full">Children: {formatChildrenKnowledge(entry.children_knowledge)}</span>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
                 </div>
               </div>
+            </>
+          )
+        )}
+      </div>
 
-              <div>
-                <h3 className="text-xl font-semibold mb-4">Knowledge Base</h3>
-                <div className="space-y-4 max-h-[600px] overflow-y-auto pr-2">
-                  {knowledge.map((entry) => (
-                    <div key={entry.id} className="p-4 border rounded-lg">
-                      <div className="flex justify-between items-start">
-                        <h4 className="font-medium">{entry.knowledge}</h4>
-                        <span className="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">ID: {entry.id}</span>
-                      </div>
-                      <p className="text-sm text-gray-600 mt-1">{entry.description}</p>
-                      <p className="text-sm font-mono mt-2">{entry.definition}</p>
-                      <div className="mt-2 text-xs text-gray-500">
-                        <span className="mr-2">Type: {entry.type}</span>
-                        <span>Children Knowledge: {formatChildrenKnowledge(entry.children_knowledge)}</span>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </>
-        )
-      )}
+      <style jsx global>{`
+        .custom-scrollbar::-webkit-scrollbar {
+          width: 6px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+          background: #f1f1f1;
+          border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+          background: #cbd5e1;
+          border-radius: 3px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: #94a3b8;
+        }
+      `}</style>
     </section>
   );
 } 

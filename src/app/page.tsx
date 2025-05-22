@@ -42,7 +42,7 @@ export default function Page() {
       <Introduction />
 
       {/* Dataset */}
-      <Dataset />
+      {/* <Dataset /> */}
       
       {/* Data Viewer */}
       <DataViewer />
