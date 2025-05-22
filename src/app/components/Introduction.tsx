@@ -11,14 +11,14 @@ const Introduction = () => {
             <div className="space-y-4">
                 <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl shadow-sm">
                     <p className="text-base text-gray-700 leading-relaxed mb-4">
-                        <strong className="text-blue-600">LiveSQLBench</strong> is a contamination-free, continuously evolving benchmark designed to evaluate LLMs on complex, real-world SQL tasks. The current version, <strong className="text-purple-600">LiveSQLBench-Lite</strong>, features 18 databases with 270 samples, serving as our initial release. We are actively expanding the benchmark to include more databases and 600+ samples in the upcoming version.
+                        <strong className="text-blue-600">LiveSQLBench</strong> is a contamination-free, continuously evolving benchmark designed to evaluate LLMs on complex, real-world SQL tasks. The current version, <strong className="text-purple-600">LiveSQLBench-Lite</strong>, features 18 databases with 270 samples, serving as our initial release. We are actively expanding in two dimensions: (1) increasing the number of databases and tasks to 600+ samples, and (2) creating <strong className="text-indigo-600">Large Versions</strong> of each database, featuring 40+ tables and 800+ columns, significantly expanding the complexity and scale.
                     </p>
 
                     <ul className="space-y-2">
                         {[
                             {
                                 title: "Live Databases",
-                                desc: "Constructed dynamically from extensive and regularly updated CSV datasets."
+                                desc: "Constructed dynamically from extensive and regularly updated CSV datasets, with both base and large versions (40+ tables with 800+ columns each DB) to test scalability."
                             },
                             {
                                 title: "Live User Queries and SQL",
@@ -38,7 +38,7 @@ const Introduction = () => {
                             },
                             {
                                 title: "Truly Live",
-                                desc: "New databases and tasks are added over time to ensure fresh, realistic evaluation conditions."
+                                desc: "New databases and tasks are added over time, with both base and large versions, to ensure fresh, realistic evaluation conditions at varying scales of complexity."
                             }
                         ].map((item, index) => (
                             <li key={index} className="flex items-start space-x-2">
@@ -55,7 +55,7 @@ const Introduction = () => {
                 </div>
 
                 <p className="text-base text-gray-700 leading-relaxed italic border-l-4 border-blue-500 pl-4 py-1">
-                    LiveSQLBench offers a robust, real-world setting to drive progress in LLMs' ability to understand, interact with, and manage dynamic database environments. Starting with LiveSQLBench-Lite, we are committed to continuously expanding our benchmark to provide an even more comprehensive evaluation platform.
+                    LiveSQLBench offers a robust, real-world setting to drive progress in LLMs' ability to understand, interact with, and manage dynamic database environments.
                 </p>
             </div>
         </div>

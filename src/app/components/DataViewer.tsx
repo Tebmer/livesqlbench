@@ -11,6 +11,7 @@ import SchemaViewer from './SchemaViewer';
 export default function DataViewer() {
   const [selectedDb, setSelectedDb] = useState<string>('');
   const [databases, setDatabases] = useState<string[]>([]);
+  const [largeDatabases, setLargeDatabases] = useState<string[]>([]);
   const [data, setData] = useState<DataEntry[]>([]);
   const [knowledge, setKnowledge] = useState<KnowledgeEntry[]>([]);
   const [selectedEntry, setSelectedEntry] = useState<DataEntry | null>(null);
@@ -34,7 +35,12 @@ export default function DataViewer() {
       const response = await fetch('/api/databases');
       if (!response.ok) throw new Error('Failed to fetch databases');
       const data = await response.json();
-      setDatabases(data);
+      // Separate base and large databases
+      const baseDatabases = data.filter((db: string) => !db.endsWith('_large'));
+      const largeDatabases = data.filter((db: string) => db.endsWith('_large'));
+      setDatabases(baseDatabases);
+      // Store large databases separately
+      setLargeDatabases(largeDatabases);
     } catch (err) {
       setError('Failed to load databases');
       console.error(err);
@@ -261,17 +267,17 @@ export default function DataViewer() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-3">LiveSQLBench Data</h2>
           <div className="text-gray-600 max-w-3xl mx-auto space-y-2">
-            <p>Explore <strong className="text-purple-600">LiveSQLBench-Lite</strong> demonstration data, our initial release featuring 270 SQL tasks across 18 diverse databases. Each task features unambiguous user queries grounded in external knowledge, with medium to hard complexity SQL statements. We are actively expanding to include 600+ samples in the upcoming version. </p>
+            <p>Explore <strong className="text-purple-600">LiveSQLBench-Lite</strong> demonstration data, our initial release featuring 270 SQL tasks across 18 diverse databases. Each task features unambiguous user queries grounded in external knowledge, with medium to hard complexity SQL statements.</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mt-3">
               <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
                 <div className="font-semibold text-blue-700">180</div>
                 <div className="text-gray-600">SELECT Queries</div>
-                <div className="text-xs text-blue-600 mt-1">(Lite Version)</div>
+                <div className="text-xs text-blue-600 mt-1">(Base Version)</div>
               </div>
               <div className="bg-purple-50 p-3 rounded-lg border border-purple-100">
                 <div className="font-semibold text-purple-700">90</div>
                 <div className="text-gray-600">Management SQLs</div>
-                <div className="text-xs text-purple-600 mt-1">(Lite Version)</div>
+                <div className="text-xs text-purple-600 mt-1">(Base Version)</div>
               </div>
               <div className="bg-green-50 p-3 rounded-lg border border-green-100">
                 <div className="font-semibold text-green-700">360</div>
@@ -281,10 +287,14 @@ export default function DataViewer() {
               <div className="bg-indigo-50 p-3 rounded-lg border border-indigo-100">
                 <div className="font-semibold text-indigo-700">18</div>
                 <div className="text-gray-600">Databases</div>
-                <div className="text-xs text-indigo-600 mt-1">(Expanding)</div>
+                <div className="text-xs text-indigo-600 mt-1">(Base Version)</div>
               </div>
             </div>
-            {/* <p className="text-sm text-gray-500 mt-3">Each task features unambiguous user queries grounded in external knowledge, with medium to hard complexity SQL statements and comprehensive knowledge bases.</p> */}
+            <div className="mt-4 p-3 bg-indigo-50 rounded-lg border border-indigo-100">
+              <p className="text-sm text-indigo-700">
+                <strong>Large Version Preview:</strong> We are currently developing large versions of each database, featuring 40+ tables and 800+ columns. Demo versions of <code className="px-1 py-0.5 bg-indigo-100 rounded">alien_large</code> and <code className="px-1 py-0.5 bg-indigo-100 rounded">archeology_large</code> are available for preview with very complex ER diagrams.
+              </p>
+            </div>
           </div>
         </div>
         
@@ -297,11 +307,22 @@ export default function DataViewer() {
               onChange={(e) => handleDbSelect(e.target.value)}
             >
               <option value="">Select a database...</option>
-              {databases.map((db) => (
-                <option key={db} value={db}>
-                  {db}
-                </option>
-              ))}
+              <optgroup label="Base Versions">
+                {databases.map((db) => (
+                  <option key={db} value={db}>
+                    {db}
+                  </option>
+                ))}
+              </optgroup>
+              {largeDatabases.length > 0 && (
+                <optgroup label="Large Versions (Preview)">
+                  {largeDatabases.map((db) => (
+                    <option key={db} value={db}>
+                      {db}
+                    </option>
+                  ))}
+                </optgroup>
+              )}
             </select>
             <div className="absolute inset-y-0 right-0 flex items-center px-3 pointer-events-none">
               <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
