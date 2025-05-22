@@ -250,7 +250,28 @@ export default function DataViewer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-3">LiveSQLBench Data</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">Explore and analyze SQL queries, solutions, and knowledge base entries</p>
+          <div className="text-gray-600 max-w-3xl mx-auto space-y-2">
+            <p>Explore a rich collection of 300+ SQL tasks across 20 diverse databases, featuring:</p>
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mt-3">
+              <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
+                <div className="font-semibold text-blue-700">200+</div>
+                <div className="text-gray-600">SELECT Queries</div>
+              </div>
+              <div className="bg-purple-50 p-3 rounded-lg border border-purple-100">
+                <div className="font-semibold text-purple-700">100+</div>
+                <div className="text-gray-600">Management SQLs</div>
+              </div>
+              <div className="bg-green-50 p-3 rounded-lg border border-green-100">
+                <div className="font-semibold text-green-700">360</div>
+                <div className="text-gray-600">Avg SQL Tokens</div>
+              </div>
+              <div className="bg-indigo-50 p-3 rounded-lg border border-indigo-100">
+                <div className="font-semibold text-indigo-700">20</div>
+                <div className="text-gray-600">Databases</div>
+              </div>
+            </div>
+            <p className="text-sm text-gray-500 mt-3">Each task features unambiguous user queries grounded in external knowledge, with medium to hard complexity SQL statements and comprehensive knowledge bases.</p>
+          </div>
         </div>
         
         <div className="mb-8 max-w-md mx-auto">
