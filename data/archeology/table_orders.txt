@@ -1,1 +1,0 @@
-projects personnel sites equipment scans scanenvironment scanpointcloud scanmesh scanspatial scanfeatures scanconservation scanregistration scanprocessing scanqc
