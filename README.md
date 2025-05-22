@@ -42,7 +42,7 @@ docker build --target development -t live_sql_bench_viewer .
 
 ### Run the container with port forwarding and volume mounting for hot reloading
 ```bash
-docker run -p 3001:3000 -v "$(pwd):/app" live_sql_bench_viewer
+docker run -p 3001:3000 -v "$(pwd):/app" live_sql_bench_viewer:latest
 ```
 
 ### Open the browser and navigate to the app
