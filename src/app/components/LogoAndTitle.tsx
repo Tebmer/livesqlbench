@@ -20,6 +20,9 @@ const LogoAndTitle = () => {
         <h1 className="text-5xl font-extrabold -mt-8 bg-gradient-to-r from-[#F95454] to-[#0D92F4] bg-clip-text text-transparent">
           LiveSQLBench
         </h1>
+        <h2 className="text-2xl font-bold text-gray-900 mb-3 leading-tight">
+          A Dynamic and Contamination-Free Benchmark for Evaluating LLMs on Real-World SQL Tasks
+        </h2>
       </div>
     </div>
   )

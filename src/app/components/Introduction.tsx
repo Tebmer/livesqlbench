@@ -2,27 +2,63 @@ import Image from 'next/image';
 
 const Introduction = () => {
     return (
-        <div className="mb-8">
-        <h2 className="text-2xl font-bold text-center mb-4">Introduction</h2>
-        <div className="mx-auto mb-6 h-0.5 w-16 bg-gradient-to-r from-gray-300 to-gray-100"></div>
-        <p className="text-gray-700 font-medium">
-          Benchmarks are important tools for tracking the rapid advancements in large language model (LLM) capabilities. However, benchmarks are not keeping pace in difficulty: LLMs now achieve over 90% accuracy on popular benchmarks like MMLU, limiting informed measurement of state-of-the-art LLM capabilities. In response, we introduce Humanity's Last Exam, a multi-modal benchmark at the frontier of human knowledge, designed to be the final closed-ended academic benchmark of its kind with broad subject coverage. The dataset consists of 2,700 challenging questions across over a hundred subjects. We publicly release these questions, while maintaining a private test set of held out questions to assess model overfitting.
-        </p>
-        <div className="w-full my-6"> {/* Set width to full for responsiveness */}
-          <div className="flex justify-start">
-            <Image 
-              src="/figure1.png" 
-              alt="Figure 1" 
-              width={800} 
-              height={533} 
-              className="max-w-full h-auto"  // Responsive styling
-            />
-          </div>
-          <p className="mt-4 text-sm text-left text-gray-700 max-w-2xl">
-            Compared against the saturation of some existing benchmarks, Humanity's Last Exam accuracy remains low across several frontier models, demonstrating its effectiveness for measuring advanced, closed-ended, academic capabilities.
-          </p>
+        <div className="max-w-4xl mx-auto px-4 py-6 bg-white rounded-lg shadow-sm">
+            <div className="text-center mb-6">
+                <h2 className="text-3xl font-bold text-gray-900 mb-2">Introduction</h2>
+                <div className="mx-auto h-1 w-20 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+            </div>
+
+            <div className="space-y-4">
+                <div className="bg-gradient-to-br from-gray-50 to-white p-5 rounded-xl shadow-sm">
+                    <p className="text-base text-gray-700 leading-relaxed mb-4">
+                        <strong className="text-blue-600">LiveSQLBench</strong> is a contamination-free, continuously evolving benchmark designed to evaluate large language models (LLMs) on complex, real-world SQL tasks.
+                    </p>
+
+                    <ul className="space-y-2">
+                        {[
+                            {
+                                title: "Live Databases",
+                                desc: "Constructed dynamically from extensive and regularly updated CSV datasets."
+                            },
+                            {
+                                title: "Live User Queries and SQL",
+                                desc: "Each task pairs user queries with annotated, gold-standard SQL statements."
+                            },
+                            {
+                                title: "Contextual Reasoning",
+                                desc: "Every database scenario includes an external knowledge document for grounding beyond the schema."
+                            },
+                            {
+                                title: "Full SQL Spectrum",
+                                desc: "Supports not just SELECT queries, but also UPDATE, CREATE, and other database management operations."
+                            },
+                            {
+                                title: "Automated Evaluation",
+                                desc: "Each question includes verifiable test cases for accurate, reproducible scoring."
+                            },
+                            {
+                                title: "Truly Live",
+                                desc: "New databases and tasks are added over time to ensure fresh, realistic evaluation conditions."
+                            }
+                        ].map((item, index) => (
+                            <li key={index} className="flex items-start space-x-2">
+                                <span className="flex-shrink-0 w-5 h-5 flex items-center justify-center bg-blue-100 text-blue-600 rounded-full font-semibold text-sm">
+                                    {index + 1}
+                                </span>
+                                <div>
+                                    <strong className="text-gray-900 text-sm block mb-0.5">{item.title}:</strong>
+                                    <span className="text-gray-700 text-sm">{item.desc}</span>
+                                </div>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                <p className="text-base text-gray-700 leading-relaxed italic border-l-4 border-blue-500 pl-4 py-1">
+                    LiveSQLBench offers a robust, real-world setting to drive progress in LLMs' ability to understand, interact with, and manage dynamic database environments.
+                </p>
+            </div>
         </div>
-      </div>
     );
 }
 

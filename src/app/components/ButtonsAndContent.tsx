@@ -32,13 +32,9 @@ const ButtonsAndContent = () => {
       {/* Organizing Team Content */}
       {isOrganizingTeamOpen && (
         <div className="text-center text-gray-700 font-medium">
-          Huonan, HKU
+          Bird Team, HKU
           <br />
-          Huonan, HKU
-          <br />
-          Huonan, HKU
-          <br />
-          Huonan, HKU
+          Google Cloud
         </div>
       )}
 

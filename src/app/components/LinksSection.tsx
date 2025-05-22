@@ -20,7 +20,7 @@ const LinksSection = () => {
         Dataset
         <span className="text-gray-500 text-sm font-mono">load_dataset(&quot;cais/hle&quot;)</span>
       </Link>
-      <Link href="#" className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
+      <Link href="https://github.com/bird-bench/livesqlbench" className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
         <Image
           src="/github.png"
           alt="GitHub"
