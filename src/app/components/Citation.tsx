@@ -73,8 +73,8 @@ const Citation = () => {
             <Mail className="mr-2 h-6 w-6 sm:h-4 sm:w-4" />
             <span>
               For any inquiries or feedback, please contact us at{' '}
-              <a href="mailto:agibenchmark@safe.ai" className="text-blue-600 hover:underline">
-                agibenchmark@safe.ai
+              <a href="mailto:bird.bench25@gmail.com" className="text-blue-600 hover:underline">
+                bird.bench25@gmail.com
               </a>
             </span>
           </div>
@@ -84,7 +84,7 @@ const Citation = () => {
             <span>
               Submit feedback to questions in the dataset via{' '}
               <a 
-                href="https://docs.google.com/forms/d/e/1FAIpQLSdP4wbF8kWokZ6-Xg8b6yxAPNlLC61v_z0u4hafIa_v4ft5Yg/viewform"
+                href="https://docs.google.com/forms/d/e/1FAIpQLSeKpLKLd9mOGJy9e4SPyIASa3RioEBfqJ1QukL0BB6LvSEOAQ/viewform?usp=header"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-blue-600 hover:underline"

@@ -267,7 +267,7 @@ export default function DataViewer() {
         <div className="text-center mb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-3">LiveSQLBench Data</h2>
           <div className="text-gray-600 max-w-3xl mx-auto space-y-2">
-            <p>Explore <strong className="text-purple-600">LiveSQLBench-Lite</strong> demonstration data, our initial release featuring 270 SQL tasks across 18 diverse databases. Each task features unambiguous user queries grounded in external knowledge, with medium to hard complexity SQL statements.</p>
+            <p>Explore <strong className="text-purple-600">LiveSQLBench-Lite</strong> sampled data, our initial release featuring 270 SQL tasks across 18 diverse databases. Each task features unambiguous user queries grounded in external knowledge, with medium to hard complexity SQL statements.</p>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 text-sm mt-3">
               <div className="bg-blue-50 p-3 rounded-lg border border-blue-100">
                 <div className="font-semibold text-blue-700">180</div>

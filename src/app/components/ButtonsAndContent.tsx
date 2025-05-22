@@ -54,11 +54,11 @@ const ButtonsAndContent = () => {
           <div className="space-y-4">
             <div>
               <h4 className="font-semibold mb-2">Lead Authors</h4>
-              <p>Huonan, HKU</p>
-              <p>Huonan, HKU</p>
+              <p>BIRD Team, HKU</p>
+              <p>Google Cloud</p>
             </div>
 
-            <div>
+            {/* <div>
               <h4 className="font-semibold mb-2">Contributing Authors</h4>
               <p>Huonan, HKU</p>
               <p>Huonan, HKU</p>
@@ -70,7 +70,7 @@ const ButtonsAndContent = () => {
               <p>Huonan, HKU</p>
               <p>Huonan, HKU</p>
               <p>Huonan, HKU</p>
-            </div>
+            </div> */}
           </div>
         </div>
       )}

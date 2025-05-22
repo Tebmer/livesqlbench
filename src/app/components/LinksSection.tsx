@@ -7,7 +7,7 @@ const LinksSection = () => {
     <div className="flex justify-center font-medium gap-8 sm:gap-8 my-2">
       <Link href="#" className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
         <FileText className="w-5 h-5" />
-        Paper
+        Paper (Coming Soon)
       </Link>
       <Link href="#" className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
         <Image
@@ -18,7 +18,7 @@ const LinksSection = () => {
           className="w-5 h-5 max-w-full h-auto"  // Ensure responsiveness for Huggingface image
         />
         Dataset
-        <span className="text-gray-500 text-sm font-mono">load_dataset(&quot;cais/hle&quot;)</span>
+        <span className="text-gray-500 text-sm font-mono"> (Coming Soon)</span>
       </Link>
       <Link href="https://github.com/bird-bench/livesqlbench" className="flex items-center gap-2 text-gray-700 hover:text-gray-900">
         <Image

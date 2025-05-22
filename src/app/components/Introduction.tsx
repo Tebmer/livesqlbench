@@ -30,7 +30,7 @@ const Introduction = () => {
                             },
                             {
                                 title: "Full SQL Spectrum",
-                                desc: "Supports not just SELECT queries, but also UPDATE, CREATE, and other database management operations."
+                                desc: "Supports not just SELECT (Business Intelligence) queries, but also CRUD (e.g., UPDATE, CREATE, and other database management operations) queries."
                             },
                             {
                                 title: "Automated Evaluation",
