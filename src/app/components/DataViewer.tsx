@@ -247,7 +247,7 @@ export default function DataViewer() {
 
   return (
     <section className="my-12" style={{ width: '100%', maxWidth: '100%', margin: '0 auto' }}>
-      <h2 className="text-2xl font-bold mb-6 text-center">Bird Interact Data Viewer</h2>
+      <h2 className="text-2xl font-bold mb-6 text-center">LiveSQLBench Data Viewer</h2>
       
       <div className="mb-8">
         <label className="block text-sm font-medium mb-2 text-center">Select Database:</label>

@@ -1,18 +1,29 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+# LiveSQLBench Homepage
+
+This is the homepage for the LiveSQLBench project. It contains:
+1. Introduction to the project
+2. Data viewer for demo data plus ER diagram of db
+3. Leaderboard for the top LLMs' performance on the benchmark
+
+
+
+
+
 ## Prerequisites
-Replace the data 'bird-interact' folder with the newest data.
+Replace the data 'data' folder with the newest data.
 
 ## Getting Started If Using Docker 
 
 ### Build the image with the development target
 ```bash 
-docker build --target development -t bird_interact_viewer .
+docker build --target development -t live_sql_bench_viewer .
 ```
 
 ### Run the container with port forwarding and volume mounting for hot reloading
 ```bash
-docker run -p 3001:3000 -v $(pwd):/app bird_interact_viewer
+docker run -p 3001:3000 -v $(pwd):/app live_sql_bench_viewer
 ```
 
 ### Open the browser and navigate to the app
